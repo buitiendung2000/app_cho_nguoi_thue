@@ -29,18 +29,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingData(
       title: 'Chào Mừng Bạn',
       description: 'Hãy làm theo các bước để bắt đầu hành trình của bạn',
-      imageAssetPath: 'assets/images/onboarding1.png',
+      imageAssetPath: 'assets/images/onboarding.png',
     ),
     OnboardingData(
       title: 'Quản lý hồ sơ cá nhân',
       description:
           'Hãy cập nhật thông tin cá nhân của bạn chính xác để chúng tôi dễ dàng quản lý',
-      imageAssetPath: 'assets/images/onboarding2.png',
+      imageAssetPath: 'assets/images/onboarding1.png',
     ),
     OnboardingData(
       title: 'Hóa Đơn',
       description: 'Dễ dàng thanh toán và quản lý hóa đơn của bạn',
-      imageAssetPath: 'assets/images/onboarding3.png',
+      imageAssetPath: 'assets/images/onboarding2.png',
     ),
     OnboardingData(
       title: 'Thông báo',
@@ -50,13 +50,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingData(
       title: 'Trò chuyện',
       description: 'Dễ dàng bước vào những cuộc tán gẫu vui vẻ cùng mọi người',
-      imageAssetPath: 'assets/images/onboarding3.png',
+      imageAssetPath: 'assets/images/onboarding4.png',
     ),
-    OnboardingData(
-      title: 'Hướng dẫn sử dụng',
-      description: 'Khi bạn gặp khó khăn gì hãy xem hướng dẫn sử dụng',
-      imageAssetPath: 'assets/images/onboarding3.png',
-    ),
+    
   ];
 
   void _onPageChanged(int index) {

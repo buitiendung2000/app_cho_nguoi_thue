@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool hasUnreadMessages = false; // Biến kiểm tra tin nhắn chưa đọc
   bool hasUnreadBills = false; // Biến kiểm tra hóa đơn chưa thanh toán
   StreamSubscription<QuerySnapshot>? _messagesSubscription;
-   bool _isDarkMode = false;
+  bool _isDarkMode = false;
   bool _useSystemTheme = false;
 
   @override
@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _checkUnreadMessages();
       _checkUnpaidBills();
       _startListeningToMessages(); // Lắng nghe tin nhắn realtime
-      
     }
   }
 
@@ -125,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // Cập nhật trạng thái hóa đơn chưa thanh toán
- void _updateBillStatus(bool hasUnpaidBill) {
+  void _updateBillStatus(bool hasUnpaidBill) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       setState(() {
@@ -133,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
-
 
   // Cập nhật FCM Token vào Firestore
   Future<void> updateFCMTokenToFirestore() async {
@@ -253,6 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _messagesSubscription?.cancel();
     super.dispose();
   }
+
   // Hàm thay đổi giao diện sáng/tối
   void _toggleTheme(bool isDarkMode) {
     // Kiểm tra xem widget có còn tồn tại không trước khi gọi setState
@@ -274,6 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+
   // Hàm hiển thị menu cài đặt
   void _showSettingsMenu(BuildContext context) {
     showModalBottomSheet(
@@ -284,14 +284,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.palette),
-              title:   Text("change_theme".tr()),
+              title: Text("change_theme".tr()),
               onTap: () {
                 _showThemeDialog(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.language),
-              title:   Text("change_language".tr()),
+              title: Text("change_language".tr()),
               onTap: () {
                 _showLanguageDialog(context);
               },
@@ -301,7 +301,8 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-void _showThemeDialog(BuildContext context) {
+
+  void _showThemeDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -309,7 +310,7 @@ void _showThemeDialog(BuildContext context) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          title:   Text('select_theme'.tr(), textAlign: TextAlign.center),
+          title: Text('select_theme'.tr(), textAlign: TextAlign.center),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -328,7 +329,7 @@ void _showThemeDialog(BuildContext context) {
                   children: [
                     Icon(Icons.wb_sunny, size: 60, color: Colors.orange),
                     const SizedBox(height: 8),
-                      Text('light_mode'.tr()),
+                    Text('light_mode'.tr()),
                   ],
                 ),
               ),
@@ -347,7 +348,7 @@ void _showThemeDialog(BuildContext context) {
                   children: [
                     Icon(Icons.nights_stay, size: 60, color: Colors.blueGrey),
                     const SizedBox(height: 8),
-                      Text('dark_mode'.tr()),
+                    Text('dark_mode'.tr()),
                   ],
                 ),
               ),
@@ -358,7 +359,7 @@ void _showThemeDialog(BuildContext context) {
     );
   }
 
-void _showLanguageDialog(BuildContext context) {
+  void _showLanguageDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -366,7 +367,7 @@ void _showLanguageDialog(BuildContext context) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          title:   Text('change_language'.tr(), textAlign: TextAlign.center),
+          title: Text('change_language'.tr(), textAlign: TextAlign.center),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -387,7 +388,7 @@ void _showLanguageDialog(BuildContext context) {
                       height: 60,
                     ),
                     const SizedBox(height: 8),
-                      Text('vietnam_language'.tr()),
+                    Text('vietnam_language'.tr()),
                   ],
                 ),
               ),
@@ -404,7 +405,7 @@ void _showLanguageDialog(BuildContext context) {
                   children: [
                     Image.asset('assets/images/us.png', width: 60, height: 60),
                     const SizedBox(height: 8),
-                      Text('english_language'.tr()),
+                    Text('english_language'.tr()),
                   ],
                 ),
               ),
@@ -414,7 +415,6 @@ void _showLanguageDialog(BuildContext context) {
       },
     );
   }
-
 
   //────────────────────────────────────────────────────────────────────────────
   // Đăng xuất
@@ -443,12 +443,13 @@ void _showLanguageDialog(BuildContext context) {
     required Color color,
     required VoidCallback onTap,
     bool showDot = false,
-  }) {final isDark = Theme.of(context).brightness == Brightness.dark;
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-           color: Theme.of(context).cardColor, // Sử dụng cardColor theo Theme
+          color: Theme.of(context).cardColor, // Sử dụng cardColor theo Theme
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             // Chỉ hiển thị bóng nếu ở Light Mode, Dark Mode thì có thể không cần bóng
@@ -507,193 +508,210 @@ void _showLanguageDialog(BuildContext context) {
             ? Colors.white
             : Colors.black;
     return Scaffold(
-      appBar: AppBar(
-        title:   Text("hello".tr()),
-        centerTitle: true,
-        backgroundColor: Colors.blueGrey,
-      ),
-      body: Container(
-         color: backgroundColor,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.blueGrey.shade200,
-              backgroundImage:
-                  avatarUrl != null ? NetworkImage(avatarUrl!) : null,
-              child:
-                  avatarUrl == null
-                      ? const Icon(Icons.person, size: 40, color: Colors.white)
-                      : null,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              fullName ?? phoneNumber ?? 'user'.tr(),
-              style:   TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: GridView.count(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                children: [
-                  _buildMenuCard(
-                    icon: Icons.account_circle,
-                    title: 'profile'.tr(),
-                    color: Colors.orange,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
-                        ),
-                      );
-                    },
+      backgroundColor: backgroundColor,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await fetchUserProfile();
+          await checkUnreadNotifications();
+          await _checkUnreadMessages();
+          await _checkUnpaidBills();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              // Giả lập AppBar nằm trong body
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 50, bottom: 16),
+                color: Colors.blueGrey,
+                child: Center(
+                  child: Text(
+                    "hello".tr(), // Hoặc thay bằng "Xin chào, bạn thuê trọ!"
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  _buildMenuCard(
-                    icon: Icons.receipt_long,
-                    title: 'bill'.tr(),
-                    color: Colors.green,
-                    showDot:
-                        hasUnreadBills, // Hiển thị chấm đỏ nếu có hóa đơn chưa thanh toán
-                    onTap: () {
-                      if (phoneNumber != null) {
+                ),
+              ),
+              const SizedBox(height: 20),
+              CircleAvatar(
+                radius: 40,
+                backgroundColor: Colors.blueGrey.shade200,
+                backgroundImage:
+                    avatarUrl != null ? NetworkImage(avatarUrl!) : null,
+                child:
+                    avatarUrl == null
+                        ? const Icon(
+                          Icons.person,
+                          size: 40,
+                          color: Colors.white,
+                        )
+                        : null,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                fullName ?? phoneNumber ?? 'user'.tr(),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  children: [
+                    _buildMenuCard(
+                      icon: Icons.account_circle,
+                      title: 'profile'.tr(),
+                      color: Colors.orange,
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder:
-                                (context) => MyBillScreen(
-                                  phoneNumber: phoneNumber!,
-
-                                  onBillStatusChanged:
-                                      _updateBillStatus, // Truyền callback vào
-                                ),
+                            builder: (context) => const ProfileScreen(),
                           ),
                         );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Không tìm thấy số điện thoại'),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                  _buildMenuCard(
-                    icon: Icons.notifications,
-                    title: 'notification'.tr(),
-                    color: Colors.deepPurple,
-                    showDot: hasUnreadNoti,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NotificationPage(),
-                        ),
-                      ).then((_) => checkUnreadNotifications());
-                    },
-                  ),
-                  _buildMenuCard(
-                    icon: Icons.chat,
-                    title: 'chat'.tr(),
-                    color: Colors.blue,
-                    showDot:
-                        hasUnreadMessages, // Hiển thị chấm đỏ khi có tin nhắn chưa đọc
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ChatPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  // Card Hướng dẫn sử dụng
-                  _buildMenuCard(
-                    icon: Icons.help_outline,
-                    title: 'guide'.tr(),
-                    color: Colors.purple,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const GuideScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  // Card Quy định chung
-                  _buildMenuCard(
-                    icon: Icons.assignment,
-                    title: 'rules'.tr(),
-                    color: Colors.blueGrey,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const GeneralRulesScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  _buildMenuCard(
-                    icon: Icons.report_rounded,
-                    title: 'report'.tr(),
-                    color: Colors.blueGrey,
-                    onTap: () {
-                      // Mở trang cài đặt
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>   FeedbackScreen(),
-                        ),
-                      );
-                      
-                    },
-                  ),
-                  _buildMenuCard(
-                    icon: Icons.meeting_room,
-                    title: 'check_out'.tr(),
-                    color: Colors.indigo,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CheckOutScreen(),
-                        ),
-                      );
-                    },
-                  ),
+                      },
+                    ),
                     _buildMenuCard(
-                    icon: Icons.settings,
-                    title: 'settings'.tr(),
-                    color: Colors.blueGrey,
-                    onTap: () {
-                      // Mở trang cài đặt
-                      _showSettingsMenu(context);
-                    },
-                  ),
-                  _buildMenuCard(
-                    icon: Icons.logout,
-                    title: 'logout'.tr(),
-                    color: Colors.redAccent,
-                    onTap: () => signOut(context),
-                  ),
-                ],
+                      icon: Icons.receipt_long,
+                      title: 'bill'.tr(),
+                      color: Colors.green,
+                      showDot: hasUnreadBills,
+                      onTap: () {
+                        if (phoneNumber != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => MyBillScreen(
+                                    phoneNumber: phoneNumber!,
+                                    onBillStatusChanged: _updateBillStatus,
+                                  ),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Không tìm thấy số điện thoại'),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.notifications,
+                      title: 'notification'.tr(),
+                      color: Colors.deepPurple,
+                      showDot: hasUnreadNoti,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NotificationPage(),
+                          ),
+                        ).then((_) => checkUnreadNotifications());
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.chat,
+                      title: 'chat'.tr(),
+                      color: Colors.blue,
+                      showDot: hasUnreadMessages,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChatPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.help_outline,
+                      title: 'guide'.tr(),
+                      color: Colors.purple,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const GuideScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.assignment,
+                      title: 'rules'.tr(),
+                      color: Colors.blueGrey,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const GeneralRulesScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.report_rounded,
+                      title: 'report'.tr(),
+                      color: Colors.blueGrey,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FeedbackScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.meeting_room,
+                      title: 'check_out'.tr(),
+                      color: Colors.indigo,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CheckOutScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.settings,
+                      title: 'settings'.tr(),
+                      color: Colors.blueGrey,
+                      onTap: () {
+                        _showSettingsMenu(context);
+                      },
+                    ),
+                    _buildMenuCard(
+                      icon: Icons.logout,
+                      title: 'logout'.tr(),
+                      color: Colors.redAccent,
+                      onTap: () => signOut(context),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
+
   }
 }
-
-
